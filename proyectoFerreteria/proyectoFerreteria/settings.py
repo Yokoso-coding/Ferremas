@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'tailwind',
     'theme',
-    'moduloBodeguero',
+    'moduloBodeguero', 
 ]
 
 MIDDLEWARE = [
