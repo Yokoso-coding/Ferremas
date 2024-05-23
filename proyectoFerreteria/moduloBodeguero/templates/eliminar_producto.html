@@ -1,0 +1,75 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Producto</title>
+    {% tailwind_preload_css %}
+    {% tailwind_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="navbar bg-blue-900 text-white">
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl">FERREMAS</a>
+            </div>
+            <div class="flex-none">
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div>
+                    </div>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <li>
+                            <a class="justify-between">
+                                Profile
+                                <span class="badge">New</span>
+                            </a>
+                        </li>
+                        <li><a>Settings</a></li>
+                        <li><a>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+
+  
+    <div class="flex h-screen bg-gray-200">
+        <div class="bg-white w-1/5 shadow-lg">
+            <ul class="menu p-4">
+                <li><a href="{% url 'listar_productos' %}" class="hover:bg-teal-200 block p-2">Productos</a></li>
+                <li><a href="{% url 'bodeguerop' %}" class="hover:bg-teal-200 block p-2">Pedidos</a></li>
+            </ul>
+        </div>
+    
+        <div class="flex-1">
+            <div class="p-10">
+                <h1 class="text-3xl font-bold mb-6">Eliminar Producto</h1>
+                <form action="{% url 'eliminar_producto' pk=producto.pk %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="pk" value="{{ producto.pk }}">
+                    <p>¿Estás seguro de que quieres eliminar este producto?</p>
+                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
+                        <i class="fas fa-trash-alt mr-2"></i> Eliminar Producto
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+      
+        
+        
+  </body>
+  </html>
