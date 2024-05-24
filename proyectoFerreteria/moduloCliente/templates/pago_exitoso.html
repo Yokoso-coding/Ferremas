@@ -1,0 +1,24 @@
+<!-- moduloCliente/templates/pago_exitoso.html -->
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Exitoso</title>
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold mb-6 text-center">Pago Exitoso</h1>
+        <div class="bg-white shadow-md rounded-lg p-4">
+            <p>El pago se ha realizado correctamente.</p>
+            <p>Orden de compra: {{ response.buy_order }}</p>
+            <p>Monto: ${{ response.amount }}</p>
+        </div>
+    </div>
+    </div>
+        <a href="{% url 'home' %}" class="btn btn-primary mt-4">Volver a la Página de Inicio</a>
+    </div>
+</body>
+</html>
