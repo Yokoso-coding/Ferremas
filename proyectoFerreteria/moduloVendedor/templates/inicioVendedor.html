@@ -72,34 +72,25 @@
           <table class="table">
             <thead>
               <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Job</th>
-                <th>Favorite Color</th>
+                <th>id_producto</th>
+                <th>nombre</th>
+                <th>descripcion</th>
+                <th>precio</th>
+                <th>stock</th>
+                <th>acciones</th>
               </tr>
             </thead>
             <tbody>
-              <!-- row 1 -->
+              {% for produ in Productos %}
               <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>Blue</td>
+                <th>{{ produ.id_producto }}</th>
+                <th>{{ produ.nombre }}</th>
+                <th>{{ produ.descripcion }}</th>
+                <th>{{ produ.precio }}</th>
+                <th>{{ produ.stock }}</th>
+                <th>en espera</th>
               </tr>
-              <!-- row 2 -->
-              <tr>
-                <th>2</th>
-                <td>Hart Hagerty</td>
-                <td>Desktop Support Technician</td>
-                <td>Purple</td>
-              </tr>
-              <!-- row 3 -->
-              <tr>
-                <th>3</th>
-                <td>Brice Swyre</td>
-                <td>Tax Accountant</td>
-                <td>Red</td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
