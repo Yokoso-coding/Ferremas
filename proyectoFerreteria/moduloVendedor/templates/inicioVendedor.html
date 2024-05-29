@@ -11,6 +11,7 @@
 
 <body>
   <header>
+    <form>
     <div class="navbar bg-base-100">
       <div class="flex-1">
         <a class="btn btn-ghost text-xl">prueba de vendedor</a>
@@ -27,6 +28,14 @@
               <span class="badge badge-sm indicator-item">8</span>
             </div>
           </div>
+          <form method="post">
+            <div class="input-group">
+              <input type="text"aria-placeholder="buscar..." name="buscar" value="">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">buscar</button>
+              </div>
+            </div>
+          </form>
           <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
             <div class="card-body">
               <span class="font-bold text-lg">8 Items</span>
