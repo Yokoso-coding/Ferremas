@@ -91,3 +91,28 @@ class PromocionCategoria(models.Model):
 
     class Meta:
         unique_together = ('id_promocion', 'id_categoria')
+
+class Carrito(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    fecha_creacion = models.DateField()
+    estado = models.CharField(max_length=20, choices=[
+        ('activo', 'Activo'),
+        ('pagado', 'Pagado'),
+        ('cancelado', 'Cancelado')
+    ])
+
+class DetalleCarrito(models.Model):
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
+
+class OrdenesCompra(models.Model):
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    fecha_compra = models.DateField()
+    metodo_pago = models.CharField(max_length=255)
+    estado_envio = models.CharField(max_length=20, choices=[
+        ('pendiente', 'Pendiente'),
+        ('enviado', 'Enviado'),
+        ('entregado', 'Entregado')
+    ])
