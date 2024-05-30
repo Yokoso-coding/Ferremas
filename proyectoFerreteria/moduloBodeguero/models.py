@@ -1,5 +1,6 @@
 from django.db import models
 from moduloCliente.models import Producto
+#from moduloCliente.models import Pedido
 
 class DetalleBodega(models.Model):
     id_detalle = models.AutoField(primary_key=True)

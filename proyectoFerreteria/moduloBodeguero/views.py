@@ -1,17 +1,29 @@
 from django.shortcuts import render,redirect
 from moduloCliente.models import Producto
+from moduloCliente.models import Pedido
 from .models import DetalleBodega
 from .forms import ProductoForm
+#from django.db.models import Q
+
+def bodeguero(request):
+   productos = Producto.objects.all()
+  # busqueda = request.GET.get("buscar")
+   #if busqueda:
+    #    Productos = Producto.objects.filter(
+     #       Q(id_producto__icontains = busqueda) |
+      #      Q(nombre__icontains = busqueda) 
+       # ).distinct()
+   return render(request, 'inicioBodeguero.html', {'productos': productos})
+
 
 def listar_detalles_bodega(request):
     detalles = DetalleBodega.objects.all()
     return render(request, 'pedidoBodeguero.html', {'detalles': detalles})
 
-def bodeguero(request):
-    return render(request, 'inicioBodeguero.html')
-
+#CRUD DE 
 def bodeguerop(request):
-    return render(request, 'pedidoBodeguero.html')
+    detalles = DetalleBodega.objects.all()
+    return render(request, 'pedidoBodeguero.html', {'detalles': detalles})
 
 
 def listar_productos(request):
