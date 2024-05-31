@@ -6,27 +6,52 @@ from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 import uuid
 from datetime import datetime
 
-# Create your views here.
 def home(request):
     request.session['carrito'] = {}
     return render(request, 'index.html')
 
 def catalogo_productos(request):
     search_query = request.GET.get('search', '')
-    category_id = request.GET.get('category', '')
-    
-    # Filtrar productos por nombre
-    productos = Producto.objects.filter(nombre__icontains=search_query)
-    
-    # Filtrar productos por categoría si se selecciona una
-    if category_id:
-        productos = productos.filter(categoria_id=category_id)
-    
-    categorias = Categoria.objects.all()
+    category_filter = request.GET.get('category', '')
+    precio_min = request.GET.get('precio_min', '')
+    precio_max = request.GET.get('precio_max', '')
+    ordenar_por = request.GET.get('ordenar_por', '')
 
+    productos = Producto.objects.all()
+
+    if search_query:
+        productos = productos.filter(nombre__icontains=search_query)
+    
+    if category_filter:
+        productos = productos.filter(categoria__id=category_filter)
+
+    if precio_min:
+        productos = productos.filter(precio__gte=precio_min)
+    
+    if precio_max:
+        productos = productos.filter(precio__lte=precio_max)
+
+    if ordenar_por:
+        if ordenar_por == 'precio_asc':
+            productos = productos.order_by('precio')
+        elif ordenar_por == 'precio_desc':
+            productos = productos.order_by('-precio')
+
+    # Obtener carrito de la sesión
+    carrito = request.session.get('carrito', {}).values()
+    
+    # Calcular el total
+    total = sum(item['cantidad'] * item['precio'] for item in carrito)
+    
     context = {
         'productos': productos,
-        'categorias': categorias,
+        'carrito': carrito,
+        'total': total,
+        'search_query': search_query,
+        'category_filter': category_filter,
+        'precio_min': precio_min,
+        'precio_max': precio_max,
+        'ordenar_por': ordenar_por,
     }
     
     return render(request, 'catalogo_productos.html', context)
@@ -43,7 +68,12 @@ def agregar_al_carrito(request, producto_id):
             pass
     else:
         if producto.stock > 0:
-            carrito[str(producto.id)] = {'nombre': producto.nombre, 'precio': str(producto.precio), 'cantidad': 1}
+            carrito[str(producto.id)] = {
+                'producto_id': producto.id, 
+                'producto_nombre': producto.nombre, 
+                'precio': float(producto.precio),  # Convertir a float
+                'cantidad': 1
+            }
         else:
             # Opcional: agregar un mensaje de error o advertencia sobre stock insuficiente
             pass
@@ -72,7 +102,6 @@ def ver_carrito(request):
     carrito = request.session.get('carrito', {})
     total = sum(float(item['precio']) * item['cantidad'] for item in carrito.values())
     return render(request, 'ver_carrito.html', {'carrito': carrito, 'total': total})
-
 
 def iniciar_pago(request):
     carrito = request.session.get('carrito', {})

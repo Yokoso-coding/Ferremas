@@ -16,7 +16,7 @@
             <ul>
                 {% for key, item in carrito.items %}
                 <li class="flex justify-between items-center py-2">
-                    <span>{{ item.nombre }} ({{ item.cantidad }})</span>
+                    <span>{{ item.producto_nombre }} ({{ item.cantidad }})</span>
                     <span>${{ item.precio|floatformat:2 }}</span>
                     <div>
                         <a href="{% url 'reducir_cantidad' key %}" class="btn btn-warning btn-sm">-</a>
@@ -29,7 +29,9 @@
                 <span class="font-bold">Total: ${{ total|floatformat:2 }}</span>
             </div>
             <div class="mt-4">
-                <a href="{% url 'iniciar_pago' %}" class="btn btn-primary">Pagar con Transbank</a>
+                <a href="{% url 'iniciar_pago' %}" class="btn btn-outline btn-secondary">Pagar con Transbank</a>
+                <a href="{% url 'catalogo_productos' %}" class="btn btn-outline btn-secondary">Volver al Catálogo</a>
+                <a href="{% url 'home' %}" class="btn btn-outline btn-secondary">Volver a la Página Inicial</a>
             </div>
             {% else %}
             <p class="text-center text-gray-600">Tu carrito está vacío.</p>
@@ -38,4 +40,3 @@
     </div>
 </body>
 </html>
-
