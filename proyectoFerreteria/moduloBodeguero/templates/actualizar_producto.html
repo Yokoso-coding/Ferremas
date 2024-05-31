@@ -71,9 +71,16 @@
                         <label for="stock" class="block text-sm font-medium text-gray-700">Stock:</label>
                         <input type="number" id="stock" name="stock" value="{{ producto.stock }}" class="mt-1 p-2 block w-full rounded-md border-gray-300" required>
                     </div>
-                  
+                    <div class="mb-4">
+                        <label for="id_categoria" class="block text-sm font-medium text-gray-700">Categoría:</label>
+                        <input type="number" id="id_categoria" name="id_categoria" value="{{ producto.id_categoria.id }}" class="mt-1 p-2 block w-full rounded-md border-gray-300" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="imagen" class="block text-sm font-medium text-gray-700">Imagen:</label>
+                        <input type="file" id="imagen" name="imagen" class="mt-1 block" accept="image/*">
+                    </div>
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Guardar Cambios</button>
                 </form>
             </div>
-        </div>
+ </body>
   </html>

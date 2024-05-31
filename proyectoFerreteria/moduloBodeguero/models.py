@@ -1,5 +1,5 @@
 from django.db import models
-from moduloCliente.models import Producto
+from moduloCliente.models import Producto, DetallePedido
 #from moduloCliente.models import Pedido
 
 class DetalleBodega(models.Model):
