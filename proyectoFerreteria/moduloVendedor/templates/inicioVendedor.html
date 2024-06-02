@@ -12,50 +12,50 @@
 <body>
   <header>
     <form>
-      <div class="navbar bg-base-100">
-        <div class="flex-1">
+      <div class="navbar grid grid-cols-12 gap-4">
+        <div class="col-span-4">
           <a class="btn btn-ghost text-xl">prueba de vendedor</a>
         </div>
-        <div class="flex-none">
-          <div class="dropdown dropdown-end">
 
-            <div class="container mx-auto py-8 flex-none">
-              <h1 class="text-3xl font-bold mb-6 text-center">Carrito de Compras</h1>
-              <div class="bg-white shadow-md rounded-lg p-4">
-                {% if carrito %}
-                <ul>
-                  {% for key, item in carrito.items %}
-                  <li class="flex justify-between items-center py-2">
-                    <span>{{ item.nombre }} ({{ item.cantidad }})</span>
-                    <span>${{ item.precio|floatformat:2 }}</span>
-                    <div>
-                      <a href="{% url 'reducir_cantidad' key %}" class="btn btn-warning btn-sm">-</a>
-                      <a href="{% url 'eliminar_del_carrito' key %}" class="btn btn-danger btn-sm">Eliminar</a>
-                    </div>
-                  </li>
-                  {% endfor %}
-                </ul>
-                <div class="text-right mt-4">
-                  <span class="font-bold">Total: ${{ total|floatformat:2 }}</span>
-                </div>
-                <div class="mt-4">
-                  <a href="{% url 'iniciar_pago' %}" class="btn btn-primary">Pagar con Transbank</a>
-                </div>
-                {% else %}
-                <p class="text-center text-gray-600">Tu carrito está vacío.</p>
-                {% endif %}
+        <div class="col-start-5 col-end-8">
+          <div class="container">
+            <h1 class="text-3xl font-bold mb-6 text-center">Carrito de Compras</h1>
+            <div class="bg-white shadow-md rounded-lg p-4">
+              {% if carrito %}
+              <ul>
+                {% for key, item in carrito.items %}
+                <li class="flex justify-between items-center py-2">
+                  <span>{{ item.nombre }} ({{ item.cantidad }})</span>
+                  <span>${{ item.precio|floatformat:2 }}</span>
+                  <div>
+                    <a href="{% url 'reducir_cantidad' key %}" class="btn btn-warning btn-sm">-</a>
+                    <a href="{% url 'eliminar_del_carrito' key %}" class="btn btn-danger btn-sm">Eliminar</a>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+              <div class="text-right mt-4">
+                <span class="font-bold">Total: ${{ total|floatformat:2 }}</span>
+              </div>
+              <div class="mt-4">
+                <a href="{% url 'iniciar_pago' %}" class="btn btn-primary">Pagar con Transbank</a>
+              </div>
+              {% else %}
+              <p class="text-center text-gray-600">Tu carrito está vacío.</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-start-9 col-end-12">
+          <form method="GET">
+            <div class="input-group">
+              <input type="text" aria-placeholder="buscar..." name="buscar" value="">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">buscar</button>
               </div>
             </div>
-
-            <form method="GET">
-              <div class="input-group">
-                <input type="text" aria-placeholder="buscar..." name="buscar" value="">
-                <div class="input-group-append">
-                  <button class="btn btn-primary" type="submit">buscar</button>
-                </div>
-              </div>
-            </form>
-          </div>
+          </form>
           <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
               <div class="w-10 rounded-full">
@@ -75,6 +75,7 @@
             </ul>
           </div>
         </div>
+
       </div>
       <div class="grid grid-cols-12 gap-4">
         <div>
