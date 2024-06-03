@@ -19,9 +19,16 @@ def vendedor(request):
     return render(request, 'inicioVendedor.html', {'Productos':Productos})
 
 def busquedaVendedor(request):
-    return render(request, 'busquedaVendedor.html')
+    busqueda = request.GET.get("buscar")
+    Productos = Producto.objects.all()
+    if busqueda:
+        Productos = Producto.objects.filter(
+            Q(id_producto__icontains = busqueda) |
+            Q(nombre__icontains = busqueda) 
+        ).distinct()
+    return render(request, 'busquedaVendedor.html', {'Productos':Productos})
 
-def catalogo_productos(request):
+def catalogoVendedor(request):
     search_query = request.GET.get('search', '')
     category_id = request.GET.get('category', '')
     
@@ -39,7 +46,7 @@ def catalogo_productos(request):
         'categorias': categorias,
     }
     
-    return render(request, 'catalogo_productos.html', context)
+    return render(request, 'catalogoVendedor.html', context)
 
 def agregar_al_carrito(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
