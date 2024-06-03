@@ -1,0 +1,47 @@
+{% extends "inicioVendedor.html" %}
+
+{% block titulo %} busqueda {% endblock %}
+
+{% block contenido %} 
+
+<div class="col-start-1 col-end-2">
+    <button class="btn btn-active">Default</button>
+    <button class="btn btn-active btn-neutral">Neutral</button>
+    <button class="btn btn-active btn-primary">Primary</button>
+    <button class="btn btn-active btn-secondary">Secondary</button>
+    <button class="btn btn-active btn-accent">Accent</button>
+    <button class="btn btn-active btn-ghost">Ghost</button>
+    <button class="btn btn-active btn-link">Link</button>
+  </div>
+  <div class="col-start-3 col-end-12">
+    <div class="overflow-x-auto">
+      <form id="carrito" name="carrito" method="post" action="card.py">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>id_producto</th>
+              <th>nombre</th>
+              <th>descripcion</th>
+              <th>precio</th>
+              <th>stock</th>
+              <th>acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for produ in Productos %}
+            <tr>
+              <th>{{ produ.id_producto }}</th>
+              <th>{{ produ.nombre }}</th>
+              <th>{{ produ.descripcion }}</th>
+              <th>{{ produ.precio }}</th>
+              <th>{{ produ.stock }}</th>
+              <th><button type="submit" class="btn btn-active btn-secondary">Añadir</button></th>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

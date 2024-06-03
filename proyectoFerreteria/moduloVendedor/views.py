@@ -18,6 +18,9 @@ def vendedor(request):
         ).distinct()
     return render(request, 'inicioVendedor.html', {'Productos':Productos})
 
+def busquedaVendedor(request):
+    return render(request, 'busquedaVendedor.html')
+
 def catalogo_productos(request):
     search_query = request.GET.get('search', '')
     category_id = request.GET.get('category', '')
