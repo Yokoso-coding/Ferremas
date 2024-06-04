@@ -5,11 +5,11 @@
 {% block contenido %} 
 
 <div class="col-start-1 col-end-2">
-    <button class="btn btn-active">busqueca</button>
-    <button class="btn btn-active btn-neutral">catalogo</button>
-    <button class="btn btn-active btn-primary">pedido</button>
-    <button class="btn btn-active btn-secondary">carrito</button>
-  </div>
+  <a class="btn btn-active" href="{% url 'busquedaVendedor' %}" role="button">busqueca</a>
+  <a class="btn btn-active btn-neutral" href="{% url 'catalogoVendedor' %}" role="button">catalogo</a>
+  <a class="btn btn-active btn-primary" href="{% url 'pedidoVendedor' %}" role="button">pedido</a>
+  <button class="btn btn-active btn-secondary">carrito</button>
+</div>
   <div class="col-start-3 col-end-12">
     <div class="overflow-x-auto">
       <form id="carrito" name="carrito" method="post" action="card.py">

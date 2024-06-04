@@ -1,0 +1,14 @@
+{% extends "inicioVendedor.html" %}
+
+{% block titulo %} pedidos {% endblock %}
+
+{% block contenido %} 
+
+<div class="col-start-1 col-end-2">
+    <a class="btn btn-active" href="{% url 'busquedaVendedor' %}" role="button">busqueca</a>
+    <a class="btn btn-active btn-neutral" href="{% url 'catalogoVendedor' %}" role="button">catalogo</a>
+    <a class="btn btn-active btn-primary" href="{% url 'pedidoVendedor' %}" role="button">pedido</a>
+    <button class="btn btn-active btn-secondary">carrito</button>
+  </div>
+
+{% endblock %}

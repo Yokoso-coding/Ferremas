@@ -5,11 +5,11 @@
 {% block contenido %} 
 
 <div class="col-start-1 col-end-2">
-    <button class="btn btn-active">busqueca</button>
-    <button class="btn btn-active btn-neutral">catalogo</button>
-    <button class="btn btn-active btn-primary">pedido</button>
+    <a class="btn btn-active" href="{% url 'busquedaVendedor' %}" role="button">busqueca</a>
+    <a class="btn btn-active btn-neutral" href="{% url 'catalogoVendedor' %}" role="button">catalogo</a>
+    <a class="btn btn-active btn-primary" href="{% url 'pedidoVendedor' %}" role="button">pedido</a>
     <button class="btn btn-active btn-secondary">carrito</button>
-</div>
+  </div>
 
 <div class="container mx-auto py-8">
     <h1 class="text-3xl font-bold mb-6 text-center">Catálogo de Productos</h1>
@@ -17,7 +17,7 @@
         <!-- Filtro y búsqueda -->
         <div class="w-1/4 bg-white shadow-md rounded-lg p-4 mr-6">
             <h2 class="text-xl font-bold mb-4">Buscar y Filtrar</h2>
-            <form method="GET" action="{% url 'catalogo_productos' %}">
+            <form method="GET" action="{% url 'catalogoVendedor' %}">
                 <div class="mb-4">
                     <label for="search" class="block text-sm font-medium text-gray-700">Buscar por nombre</label>
                     <input type="text" name="search" id="search" class="input input-bordered w-full mt-1" placeholder="Nombre del producto" value="{{ request.GET.search }}">
