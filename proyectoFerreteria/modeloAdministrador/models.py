@@ -12,4 +12,5 @@ class modeloAdministrador(models.Model):
     contrasena=models.CharField(max_length=100)
     tipo_usuario=models.CharField(max_length=20, choices=OPCIONES_USUARIO)
 
-    
+class Meta:
+        app_label = 'proyectoFerreteria'

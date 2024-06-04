@@ -16,11 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from modeloAdministrador.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
     path('', include('moduloCliente.urls')),
     path('bodeguero/', include('moduloBodeguero.urls')),
-    path('administrador/', include('moduloAdministrador.urls'))
+    path('administrador/', include('proyectoFerreteria.modeloAdministrador.urls')),
+    path('crear/',crear_usuario('inicio-admin.html'))
 ]

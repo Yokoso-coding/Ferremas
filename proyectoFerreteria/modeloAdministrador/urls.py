@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import modeloAdministrador
+from .views import modeloAdministradorForm
 
 urlpatterns = [
-    path('inicio/', , name="bodeguero")
+    path('inicio/',crear_usuario, name='administrador')
 ]

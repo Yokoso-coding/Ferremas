@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'moduloBodeguero', 
+    'modeloAdministrador',
 ]
 
 MIDDLEWARE = [

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import modeloAdministradorForm
 
-def crear_usuario(request)
+def crear_usuario(request):
     if request.method == 'POST':
         form =modeloAdministradorForm(request.POST)
         if form.is_valid():
