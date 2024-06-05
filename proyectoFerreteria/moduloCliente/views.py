@@ -7,8 +7,11 @@ import uuid
 from datetime import datetime
 
 def home(request):
+    context = {
+        'MEDIA_URL': settings.MEDIA_URL,
+    }
     request.session['carrito'] = {}
-    return render(request, 'index.html')
+    return render(request, 'index.html', context)
 
 def catalogo_productos(request):
     search_query = request.GET.get('search', '')
@@ -81,6 +84,13 @@ def agregar_al_carrito(request, producto_id):
     request.session['carrito'] = carrito
     return redirect('catalogo_productos')
 
+def aumentar_cantidad(request, key):
+    carrito = request.session.get('carrito', {})
+    if key in carrito:
+        carrito[key]['cantidad'] += 1
+        request.session['carrito'] = carrito
+    return redirect('ver_carrito')
+
 def reducir_cantidad(request, producto_id):
     carrito = request.session.get('carrito', {})
     if str(producto_id) in carrito:
@@ -141,3 +151,4 @@ def confirmar_pago(request):
         return render(request, 'pago_exitoso.html', {'response': response})
     else:
         return render(request, 'pago_fallido.html', {'response': response})
+

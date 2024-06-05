@@ -127,12 +127,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -148,5 +142,17 @@ TRANSBANK_COMMERCE_CODE = '597055555532'  # Ejemplo: '597055555532'
 TRANSBANK_API_KEY = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C'  # Ejemplo: '1234567890abcdef'
 TRANSBANK_ENVIRONMENT = 'integration'  # Cambia a 'production' cuando vayas a producción
 
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+
+# Agrega ambos directorios estáticos
+STATICFILES_DIRS = [
+    BASE_DIR / "static_src",  # Directorio estático en el root del proyecto
+    BASE_DIR / "theme/static/css",  # Directorio estático en la carpeta 'theme'
+]
+
+STATIC_ROOT = BASE_DIR / "static"
+
+# Media files
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
