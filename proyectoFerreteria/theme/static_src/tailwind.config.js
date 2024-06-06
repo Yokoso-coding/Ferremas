@@ -40,10 +40,6 @@ module.exports = {
          * and make sure the pattern below matches your project structure.
          */
         // '../../**/*.py'
-        './templates/**/*.html',
-        './moduloCliente/templates/**/*.html', // Incluye todas las rutas de tus plantillas
-        './moduloCliente/static/src/**/*.js',  // Ajusta esto según tu estructura de proyecto
-        './moduloCliente/static/src/**/*.css',  // Ajusta esto según tu estructura de proyecto
     ],
     theme: {
         extend: {},

@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
-from pathlib import Path
 import os
+from pathlib import Path
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,6 +44,8 @@ INSTALLED_APPS = [
     'theme',
     'moduloBodeguero',
     'moduloVendedor',
+    'moduloContador',
+
 ]
 
 MIDDLEWARE = [
@@ -61,7 +64,7 @@ ROOT_URLCONF = 'proyectoFerreteria.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,14 +90,13 @@ WSGI_APPLICATION = 'proyectoFerreteria.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ferremasbd',        # Nombre de la base de datos
-        'USER': 'admin',      # Tu usuario de MySQL
-        'PASSWORD': 'password', # Tu contraseña de MySQL
-        'HOST': '127.0.0.1',       # Host de la base de datos (probablemente 'localhost')
-        'PORT': '3306',            # Puerto de la base de datos (el predeterminado para MySQL es 3306)
+        'NAME': 'ferremas',
+        'USER': 'root',
+        'PASSWORD': '21jo16rg04E$',
+        'HOST': '127.0.0.1',
+        'PORT': '3306'
     }
 }
-
 
 
 # Password validation
@@ -132,7 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -143,11 +145,11 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-# Parametros Transbank
-
 TRANSBANK_COMMERCE_CODE = '597055555532'  # Ejemplo: '597055555532'
 TRANSBANK_API_KEY = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C'  # Ejemplo: '1234567890abcdef'
 TRANSBANK_ENVIRONMENT = 'integration'  # Cambia a 'production' cuando vayas a producción
+
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

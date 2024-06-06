@@ -4,52 +4,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bodeguero</title>
+    {% tailwind_preload_css %}
     {% tailwind_css %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+  
     <header>
-        <div class="navbar bg-base-100">
+        <div class="navbar bg-blue-900 text-white">
             <div class="flex-1">
-              <a class="btn btn-ghost text-xl">FERREMAS</a>
+                <a class="btn btn-ghost text-xl">FERREMAS</a>
             </div>
-            <div class="flex-none">
-              <div class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-                  <div class="indicator">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                    <span class="badge badge-sm indicator-item">8</span>
-                  </div>
-                </div>
-                <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
-                  <div class="card-body">
-                    <span class="font-bold text-lg">8 Items</span>
-                    <span class="text-info">Subtotal: $999</span>
-                    <div class="card-actions">
-                      <button class="btn btn-primary btn-block">View cart</button>
+
+            <div class="flex-none bg-blue-900" style="height: 30px;">
+                <form method="GET" class="flex items-center h-full">
+                    <div class="input-group flex items-center">
+                        <input type="text" aria-placeholder="buscar..." name="buscar" value="" class="input input-bordered text-black placeholder-gray-500 h-full" style="background-color: #FFFFFF;">
+                        <button class="btn btn-primary h-full" type="submit">Buscar</button>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                  <div class="w-10 rounded-full">
-                    <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                  </div>
-                </div>
-                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                  <li>
-                    <a class="justify-between">
-                      Profile
-                      <span class="badge">New</span>
-                    </a>
-                  </li>
-                  <li><a>Settings</a></li>
-                  <li><a>Logout</a></li>
-                </ul>
-              </div>
+                </form>
             </div>
-          </div>
-        </header>
-</body>
-</html>
+            
+            
+            
+            
+            
+
+            <div class="flex-none bg-blue-900">
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div>
+                    </div>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <li>
+                            <a class="justify-between">
+                                Profile
+                                <span class="badge">New</span>
+                            </a>
+                        </li>
+                        <li><a>Settings</a></li>
+                        <li><a>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="bg-gray-100 flex">
+        <!-- menú lateral -->
+        <div class="bg-white w-1/6 md:order-1 md:mr-4">
+            <ul class="menu p-4">
+                <li><a href="{% url 'listar_productos' %}" class="hover:bg-teal-200 block p-2">Productos</a></li>
+                <li><a href="{% url 'bodeguerop' %}" class="hover:bg-teal-200 block p-2">Pedidos</a></li>
+            </ul>
+        </div>
+    
+
+        <div class="bg-purple-100 flex-1 md:order-2">
+            <div class="p-4">
+                <div class="overflow-x-auto bg-purple-100 rounded-lg">
+                    <!-- Botón para crear un nuevo producto -->
+                    <a href="{% url 'crear_producto' %}" class="btn btn-success mb-4">
+                        <i class="fas fa-plus mr-2"></i> Agregar Nuevo Producto
+                    </a>
+                    <table class="table w-full">
+                        <thead>
+                            <tr>
+                                <th class="bg-purple-200 text-lg text-center" colspan="6">Productos</th>
+                            </tr>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Imagen</th>
+                                <th></th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- recorre productos y los muestra -->
+                            {% for producto in productos %}
+                            <tr>
+                                <td>{{ producto.nombre }}</td>
+                                <td>{{ producto.descripcion }}</td>
+                                <td>{{ producto.precio }}</td>
+                                <td>{{ producto.stock }}</td>
+                                <td>
+                                    {% if producto.imagen %}
+                                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                                    {% else %}
+                                        No hay imagen disponible
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'actualizar_producto' pk=producto.pk %}" class="btn btn-success">
+                                        <i class="fas fa-edit"></i> Actualizar
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        
+   
+       
+  </body>
+  </html>

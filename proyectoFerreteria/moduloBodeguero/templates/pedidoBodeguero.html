@@ -1,0 +1,92 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bodeguero</title>
+    {% tailwind_preload_css %}
+    {% tailwind_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+</head>
+<body>
+    <!-- barra de navegación -->
+    <header>
+        <div class="navbar bg-blue-900 text-white">
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl">FERREMAS</a>
+            </div>
+            <div class="flex-none">
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                        <div class="indicator"></div>
+                    </div>
+                </div>
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div>
+                    </div>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <li>
+                            <a class="justify-between">
+                                Profile
+                                <span class="badge">New</span>
+                            </a>
+                        </li>
+                        <li><a>Settings</a></li>
+                        <li><a>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+
+  
+    <div class="bg-gray-100 flex">
+        <!-- menú lateral -->
+        <div class="bg-white w-1/6 md:order-1 md:mr-4">
+            <ul class="menu p-4">
+                <li><a href="{% url 'listar_productos' %}" class="hover:bg-teal-200 block p-2">Productos</a></li>
+                <li><a href="{% url 'bodeguerop' %}" class="hover:bg-teal-200 block p-2">Pedidos</a></li>
+            </ul>
+        </div>
+    
+        
+        <div class="bg-purple-100 flex-1 md:order-2">
+            <div class="p-4">
+                <div class="overflow-x-auto bg-purple-100 rounded-lg">
+                    <table class="table w-full">
+                       
+                        <thead>
+                            <tr>
+                                <th class="bg-purple-200 text-lg text-center" colspan="4">Pedidos</th>
+                            </tr>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Fecha de Creación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- recorre detalles y los muestra -->
+                            {% for detalle in detalles %}
+                            <tr>
+                                <td>{{ detalle.id_producto.nombre }}</td> 
+                                <td>{{ detalle.cantidad }}</td>
+                                <td>{{ detalle.precio }}</td>
+                                <td>{{ detalle.fecha_creacion|date:"Y-m-d H:i" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+  </body>
+  </html>
