@@ -31,7 +31,7 @@ def catalogo_productos(request):
     
     return render(request, 'catalogo_productos.html', context)
 
-def agregar_al_carrito(request, producto_id):
+def agregar_al_carro(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     carrito = request.session.get('carrito', {})
 

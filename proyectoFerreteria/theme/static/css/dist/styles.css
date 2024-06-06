@@ -1353,8 +1353,6 @@ html {
     }
   }
 
-<<<<<<< HEAD
-=======
   .btn-outline.btn-secondary:hover {
     --tw-text-opacity: 1;
     color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
@@ -1367,7 +1365,6 @@ html {
     }
   }
 
->>>>>>> marcos2
   .btn-outline.btn-warning:hover {
     --tw-text-opacity: 1;
     color: var(--fallback-wac,oklch(var(--wac)/var(--tw-text-opacity)));
@@ -1583,8 +1580,6 @@ html {
   height: auto;
 }
 
-<<<<<<< HEAD
-=======
 .table {
   position: relative;
   width: 100%;
@@ -1618,7 +1613,6 @@ html {
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
 }
 
->>>>>>> marcos2
 .avatar-group :where(.avatar) {
   overflow: hidden;
   border-radius: 9999px;
@@ -1654,8 +1648,6 @@ html {
     --btn-color: var(--fallback-p);
   }
 
-<<<<<<< HEAD
-=======
   .btn-secondary {
     --btn-color: var(--fallback-s);
   }
@@ -1664,7 +1656,6 @@ html {
     --btn-color: var(--fallback-n);
   }
 
->>>>>>> marcos2
   .btn-warning {
     --btn-color: var(--fallback-wa);
   }
@@ -1689,8 +1680,6 @@ html {
     border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
   }
 
-<<<<<<< HEAD
-=======
   .btn-outline.btn-secondary.btn-active {
     background-color: color-mix(in oklab, var(--fallback-s,oklch(var(--s)/1)) 90%, black);
     border-color: color-mix(in oklab, var(--fallback-s,oklch(var(--s)/1)) 90%, black);
@@ -1711,19 +1700,15 @@ html {
     border-color: color-mix(in oklab, var(--fallback-in,oklch(var(--in)/1)) 90%, black);
   }
 
->>>>>>> marcos2
   .btn-outline.btn-warning.btn-active {
     background-color: color-mix(in oklab, var(--fallback-wa,oklch(var(--wa)/1)) 90%, black);
     border-color: color-mix(in oklab, var(--fallback-wa,oklch(var(--wa)/1)) 90%, black);
   }
-<<<<<<< HEAD
-=======
 
   .btn-outline.btn-error.btn-active {
     background-color: color-mix(in oklab, var(--fallback-er,oklch(var(--er)/1)) 90%, black);
     border-color: color-mix(in oklab, var(--fallback-er,oklch(var(--er)/1)) 90%, black);
   }
->>>>>>> marcos2
 }
 
 .btn:focus-visible {
@@ -1743,8 +1728,6 @@ html {
     --btn-color: var(--p);
   }
 
-<<<<<<< HEAD
-=======
   .btn-secondary {
     --btn-color: var(--s);
   }
@@ -1753,14 +1736,11 @@ html {
     --btn-color: var(--n);
   }
 
->>>>>>> marcos2
   .btn-warning {
     --btn-color: var(--wa);
   }
 }
 
-<<<<<<< HEAD
-=======
 .btn-secondary {
   --tw-text-opacity: 1;
   color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
@@ -1773,7 +1753,6 @@ html {
   outline-color: var(--fallback-n,oklch(var(--n)/1));
 }
 
->>>>>>> marcos2
 .btn-warning {
   --tw-text-opacity: 1;
   color: var(--fallback-wac,oklch(var(--wac)/var(--tw-text-opacity)));
@@ -1833,8 +1812,6 @@ html {
   color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
 }
 
-<<<<<<< HEAD
-=======
 .btn-outline.btn-secondary {
   --tw-text-opacity: 1;
   color: var(--fallback-s,oklch(var(--s)/var(--tw-text-opacity)));
@@ -1860,7 +1837,6 @@ html {
   color: var(--fallback-inc,oklch(var(--inc)/var(--tw-text-opacity)));
 }
 
->>>>>>> marcos2
 .btn-outline.btn-warning {
   --tw-text-opacity: 1;
   color: var(--fallback-wa,oklch(var(--wa)/var(--tw-text-opacity)));
@@ -1871,14 +1847,11 @@ html {
   color: var(--fallback-wac,oklch(var(--wac)/var(--tw-text-opacity)));
 }
 
-<<<<<<< HEAD
-=======
 .btn-outline.btn-error.btn-active {
   --tw-text-opacity: 1;
   color: var(--fallback-erc,oklch(var(--erc)/var(--tw-text-opacity)));
 }
 
->>>>>>> marcos2
 .btn.btn-disabled,
   .btn[disabled],
   .btn:disabled {
@@ -2610,8 +2583,6 @@ html {
   z-index: 1;
 }
 
-<<<<<<< HEAD
-=======
 .col-span-4 {
   grid-column: span 4 / span 4;
 }
@@ -2644,7 +2615,6 @@ html {
   grid-column-end: 8;
 }
 
->>>>>>> marcos2
 .mx-4 {
   margin-left: 1rem;
   margin-right: 1rem;
@@ -2660,19 +2630,14 @@ html {
   margin-bottom: 0.5rem;
 }
 
-<<<<<<< HEAD
-=======
 .mb-4 {
   margin-bottom: 1rem;
 }
 
->>>>>>> marcos2
 .mb-6 {
   margin-bottom: 1.5rem;
 }
 
-<<<<<<< HEAD
-=======
 .mr-6 {
   margin-right: 1.5rem;
 }
@@ -2681,28 +2646,12 @@ html {
   margin-top: 0.25rem;
 }
 
->>>>>>> marcos2
 .mt-3 {
   margin-top: 0.75rem;
 }
 
 .mt-4 {
   margin-top: 1rem;
-<<<<<<< HEAD
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.mr-6 {
-  margin-right: 1.5rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
-=======
->>>>>>> marcos2
 }
 
 .block {
@@ -2713,10 +2662,6 @@ html {
   display: flex;
 }
 
-<<<<<<< HEAD
-.grid {
-  display: grid;
-=======
 .table {
   display: table;
 }
@@ -2727,7 +2672,6 @@ html {
 
 .h-48 {
   height: 12rem;
->>>>>>> marcos2
 }
 
 .h-5 {
@@ -2746,13 +2690,10 @@ html {
   width: 2.5rem;
 }
 
-<<<<<<< HEAD
-=======
 .w-3\/4 {
   width: 75%;
 }
 
->>>>>>> marcos2
 .w-5 {
   width: 1.25rem;
 }
@@ -2765,17 +2706,6 @@ html {
   width: 100%;
 }
 
-<<<<<<< HEAD
-.w-1\/4 {
-  width: 25%;
-}
-
-.w-3\/4 {
-  width: 75%;
-}
-
-=======
->>>>>>> marcos2
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -2795,13 +2725,10 @@ html {
 
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
-<<<<<<< HEAD
-=======
 }
 
 .grid-cols-12 {
   grid-template-columns: repeat(12, minmax(0, 1fr));
->>>>>>> marcos2
 }
 
 .items-center {
@@ -2816,10 +2743,6 @@ html {
   justify-content: space-between;
 }
 
-<<<<<<< HEAD
-.gap-8 {
-  gap: 2rem;
-=======
 .gap-4 {
   gap: 1rem;
 }
@@ -2830,7 +2753,6 @@ html {
 
 .overflow-x-auto {
   overflow-x: auto;
->>>>>>> marcos2
 }
 
 .rounded-box {
@@ -2863,14 +2785,11 @@ html {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-<<<<<<< HEAD
-=======
 }
 
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
->>>>>>> marcos2
 }
 
 .p-2 {
@@ -2928,11 +2847,6 @@ html {
   line-height: 1.75rem;
 }
 
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
 .font-bold {
   font-weight: 700;
 }
@@ -2943,10 +2857,6 @@ html {
 
 .font-semibold {
   font-weight: 600;
-}
-
-.font-medium {
-  font-weight: 500;
 }
 
 .leading-normal {
@@ -2962,14 +2872,11 @@ html {
   color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
-<<<<<<< HEAD
-=======
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
->>>>>>> marcos2
 .text-gray-800 {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
@@ -2980,14 +2887,6 @@ html {
   color: var(--fallback-in,oklch(var(--in)/var(--tw-text-opacity)));
 }
 
-<<<<<<< HEAD
-.text-gray-700 {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-=======
->>>>>>> marcos2
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);

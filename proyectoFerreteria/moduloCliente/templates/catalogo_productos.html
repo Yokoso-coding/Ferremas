@@ -91,7 +91,7 @@
                             <h2 class="card-title text-xl font-bold">{{ producto.nombre }}</h2>
                             <p class="text-gray-600">{{ producto.descripcion }}</p>
                             <p class="text-gray-800 font-semibold mt-4">${{ producto.precio }}</p>
-                            <a href="{% url 'agregar_al_carrito' producto.id %}" class="btn btn-primary mt-4">Agregar al Carrito</a>
+                            <a href="{% url 'agregar_al_carro' producto.id %}" class="btn btn-primary mt-4">Agregar al Carrito</a>
                         </div>
                     </div>
                     {% endfor %}

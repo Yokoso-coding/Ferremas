@@ -14,7 +14,7 @@ class Producto(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.IntegerField()
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to='media/productos/', null=True, blank=True)
+    imagen = models.ImageField(upload_to='productos/', null=True, blank=True)
     activo = models.BooleanField(default=True)
 
     def __str__(self):
