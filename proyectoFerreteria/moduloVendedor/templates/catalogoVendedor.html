@@ -1,0 +1,61 @@
+{% extends "inicioVendedor.html" %}
+
+{% block titulo %} catalogo {% endblock %}
+
+{% block contenido %} 
+
+<div class="col-start-1 col-end-2">
+    <a class="btn btn-active" href="{% url 'busquedaVendedor' %}" role="button">busqueca</a>
+    <a class="btn btn-active btn-neutral" href="{% url 'catalogoVendedor' %}" role="button">catalogo</a>
+    <a class="btn btn-active btn-primary" href="{% url 'pedidoVendedor' %}" role="button">pedido</a>
+    <button class="btn btn-active btn-secondary">carrito</button>
+  </div>
+
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center">Catálogo de Productos</h1>
+    <div class="flex">
+        <!-- Filtro y búsqueda -->
+        <div class="w-1/4 bg-white shadow-md rounded-lg p-4 mr-6">
+            <h2 class="text-xl font-bold mb-4">Buscar y Filtrar</h2>
+            <form method="GET" action="{% url 'catalogoVendedor' %}">
+                <div class="mb-4">
+                    <label for="search" class="block text-sm font-medium text-gray-700">Buscar por nombre</label>
+                    <input type="text" name="search" id="search" class="input input-bordered w-full mt-1" placeholder="Nombre del producto" value="{{ request.GET.search }}">
+                </div>
+                <div class="mb-4">
+                    <label for="category" class="block text-sm font-medium text-gray-700">Filtrar por categoría</label>
+                    <select name="category" id="category" class="select select-bordered w-full mt-1">
+                        <option value="">Todas las categorías</option>
+                        {% for categoria in categorias %}
+                            <option value="{{ categoria.id }}" {% if request.GET.category == categoria.id|stringformat:"s" %}selected{% endif %}>{{ categoria.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <button type="submit" class="btn btn-primary w-full">Aplicar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Catálogo de productos -->
+        <div class="w-3/4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {% for producto in productos %}
+                <div class="card bg-white shadow-md rounded-lg p-4">
+                    <div class="card-body">
+                        {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="w-full h-48 object-cover mb-4 rounded-lg">
+                        {% endif %}
+                        <h2 class="card-title text-xl font-bold">{{ producto.nombre }}</h2>
+                        <p class="text-gray-600">{{ producto.descripcion }}</p>
+                        <p class="text-gray-800 font-semibold mt-4">${{ producto.precio }}</p>
+                        <a href="{% url 'agregar_al_carrito' producto.id %}" class="btn btn-primary mt-4">Agregar al Carrito</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
