@@ -47,15 +47,48 @@
         <!-- menú lateral -->
         <div class="bg-white w-1/6 md:order-1 md:mr-4">
             <ul class="menu p-4">
-                <li><a href="{% url 'listar_productos' %}" class="hover:bg-teal-200 block p-2">Generar reportes mes</a></li>
+                <li><a href="{% url 'reporte_view' %}" class="hover:bg-teal-200 block p-2">Generar reportes mes</a></li>
                 <li><a href="{% url 'bodeguerop' %}" class="hover:bg-teal-200 block p-2"></a></li>
             </ul>
         </div>
-    
 
-        
-        
-   
-       
+        <div class="flex-grow p-4">
+            <h1 class="text-2xl font-bold mb-4">Reporte de Pedidos</h1>
+            <table class="min-w-full bg-white border border-gray-200">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="border px-4 py-2">ID Pedido</th>
+                        <th class="border px-4 py-2">Usuario</th>
+                        <th class="border px-4 py-2">Fecha</th>
+                        <th class="border px-4 py-2">Estado</th>
+                        <th class="border px-4 py-2">Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in pedidos %}
+                    <tr>
+                        <td class="border px-4 py-2">{{ pedido.id_pedido }}</td>
+                        <td class="border px-4 py-2">{{ pedido.id_usuario.nombre }}</td>
+                        <td class="border px-4 py-2">{{ pedido.fecha }}</td>
+                        <td class="border px-4 py-2">{{ pedido.estado }}</td>
+                        <td class="border px-4 py-2">
+                            <ul class="list-disc pl-4">
+                                {% for detalle in detalles %}
+                                    {% if detalle.id_pedido.id_pedido == pedido.id_pedido %}
+                                    <li>{{ detalle.id_producto.nombre }} - {{ detalle.cantidad }} x {{ detalle.precio }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="mt-4">
+                <a href="{% url 'generar_pdf' %}" class="btn btn-blue">Descargar PDF</a>
+            </div>
+        </div>
+    </div>
+
   </body>
   </html>

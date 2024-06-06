@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Pedidos</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f2f2f2; }
+        ul { list-style-type: none; padding: 0; }
+    </style>
+</head>
+<body>
+    <h1>Reporte de Pedidos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Pedido</th>
+                <th>Usuario</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+            <tr>
+                <td>{{ pedido.id_pedido }}</td>
+                <td>{{ pedido.id_usuario.nombre }}</td>
+                <td>{{ pedido.fecha }}</td>
+                <td>{{ pedido.estado }}</td>
+                <td>
+                    <ul>
+                        {% for detalle in detalles %}
+                            {% if detalle.id_pedido.id_pedido == pedido.id_pedido %}
+                            <li>{{ detalle.id_producto.nombre }} - {{ detalle.cantidad }} x {{ detalle.precio }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
