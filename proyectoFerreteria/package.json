@@ -4,5 +4,8 @@
   },
   "dependencies": {
     "flowbite": "^2.3.0"
+  },
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./moduloCliente/static/src/style.css -o ./moduloCliente/static/dist/styles.css"
   }
 }

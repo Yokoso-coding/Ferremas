@@ -5,13 +5,30 @@ from django.urls import reverse
 from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 import uuid
 from datetime import datetime
-
+from django.db.models import Q
 # Create your views here.
-def home(request):
-    request.session['carrito'] = {}
-    return render(request, 'index.html')
 
-def catalogo_productos(request):
+def vendedor(request):
+    busqueda = request.GET.get("buscar")
+    Productos = Producto.objects.all()
+    if busqueda:
+        Productos = Producto.objects.filter(
+            Q(id_producto__icontains = busqueda) |
+            Q(nombre__icontains = busqueda) 
+        ).distinct()
+    return render(request, 'inicioVendedor.html', {'Productos':Productos})
+
+def busquedaVendedor(request):
+    busqueda = request.GET.get("buscar")
+    Productos = Producto.objects.all()
+    if busqueda:
+        Productos = Producto.objects.filter(
+            Q(id_producto__icontains = busqueda) |
+            Q(nombre__icontains = busqueda) 
+        ).distinct()
+    return render(request, 'busquedaVendedor.html', {'Productos':Productos})
+
+def catalogoVendedor(request):
     search_query = request.GET.get('search', '')
     category_id = request.GET.get('category', '')
     
@@ -29,7 +46,10 @@ def catalogo_productos(request):
         'categorias': categorias,
     }
     
-    return render(request, 'catalogo_productos.html', context)
+    return render(request, 'catalogoVendedor.html', context)
+
+def pedidoVendedor(request):
+    return render(request, 'pedidoVendedor.html')
 
 def agregar_al_carrito(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
