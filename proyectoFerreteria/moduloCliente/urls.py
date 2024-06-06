@@ -15,17 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import home, catalogo_productos, agregar_al_carro, ver_carrito, reducir_cantidad, eliminar_del_carrito, iniciar_pago, confirmar_pago
+from .views import home, catalogo_productos, agregar_al_carrito, ver_carrito, reducir_cantidad, aumentar_cantidad, eliminar_del_carrito, iniciar_pago, confirmar_pago
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('', home, name="home"),
     path('catalogo/', catalogo_productos, name='catalogo_productos'),
-    path('agregar/<int:producto_id>/', agregar_al_carro, name='agregar_al_carro'),
+    path('agregar/<int:producto_id>/', agregar_al_carrito, name='agregar_al_carrito'),
     path('carrito/', ver_carrito, name='ver_carrito'),
     path('reducir/<int:producto_id>/', reducir_cantidad, name='reducir_cantidad'),
     path('eliminar/<int:producto_id>/', eliminar_del_carrito, name='eliminar_del_carrito'),
+    path('aumentar/<int:producto_id>/', aumentar_cantidad, name='aumentar_cantidad'),  # Nueva URL para aumentar cantidad
     path('iniciar_pago/', iniciar_pago, name='iniciar_pago'),
     path('confirmar_pago/', confirmar_pago, name='confirmar_pago'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
