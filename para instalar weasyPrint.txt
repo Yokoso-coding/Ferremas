@@ -1,0 +1,30 @@
+﻿C:\Users\massr\Ferremas\proyectoFerreteria
+
+
+python -m pip install --upgrade pip setuptools
+
+
+python -m pip install WeasyPrint
+
+
+#para ver si funciona
+python -m weasyprint http://weasyprint.org weasyprint.pdf
+#arroja error
+
+
+#instalar gtk3 con este link
+https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases
+
+
+#en el buscador de windows buscar: editar variables de entorno del sistema
+#ir a variables de entorno/ variables del sistema/ path
+#se tiene que ver si esta GTK3-Runtime
+
+
+#para hacerlo correr y terminar se repite :
+
+
+python -m weasyprint http://weasyprint.org weasyprint.pdf
+
+
+----

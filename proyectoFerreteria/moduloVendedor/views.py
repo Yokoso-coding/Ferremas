@@ -6,6 +6,7 @@ from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 import uuid
 from datetime import datetime
 from django.db.models import Q
+from moduloCliente.models import Producto
 # Create your views here.
 
 def vendedor(request):
@@ -23,7 +24,7 @@ def busquedaVendedor(request):
     Productos = Producto.objects.all()
     if busqueda:
         Productos = Producto.objects.filter(
-            Q(id_producto__icontains = busqueda) |
+            Q(id__icontains = busqueda) |
             Q(nombre__icontains = busqueda) 
         ).distinct()
     return render(request, 'busquedaVendedor.html', {'Productos':Productos})

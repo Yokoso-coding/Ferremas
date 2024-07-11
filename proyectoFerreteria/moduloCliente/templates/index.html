@@ -5,14 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina principal</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     {% tailwind_css %}
 </head>
 <body>
     <header>
       <div class="navbar bg-base-100">
         <div class="flex-1">
-          <a class="btn btn-ghost text-xl">daisyUI</a>
+          <a class="btn btn-ghost text-xl">Ferremas</a>
         </div>
         <div class="flex-none">
           <div class="dropdown dropdown-end">
@@ -40,49 +39,57 @@
             </div>
             <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
               <li>
-                <a class="justify-between">
-                  Profile
-                  <span class="badge">New</span>
-                </a>
+                {% if user.is_authenticated %}
+                  <a class="justify-between" href="{% url 'profile' %}">
+                    Profile
+                    <span class="badge">New</span>
+                  </a>
+                {% else %}
+                  <a class="justify-between" href="{% url 'register' %}">
+                    Register
+                    <span class="badge">New</span>
+                  </a>
+                {% endif %}
               </li>
-              <li><a>Settings</a></li>
-              <li><a>Logout</a></li>
+              {% if user.is_authenticated %}
+                <li><a href="{% url 'settings' %}">Settings</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+              {% endif %}
             </ul>
           </div>
         </div>
       </div>
     </header>
-      <main>
-          <div class="flex justify-center ">
-            <div class="carousel w-full max-w-screen-md max-h-96">
-                <div id="item1" class="carousel-item w-full">
-                  <img src="{{ MEDIA_URL }}carrusel/banner1.png" class="w-auto h-auto max-w-full max-h-full object-cover" alt="Banner 1">
-                </div>
-                <div id="item2" class="carousel-item w-full">
-                  <img src="{{ MEDIA_URL }}carrusel/banner2.png" class="w-auto h-auto max-w-full max-h-full object-cover" alt="Banner 2">
-                </div>
-                <div id="item3" class="carousel-item w-full">
-                  <img src="{{ MEDIA_URL }}carrusel/banner3.png" class="w-auto h-auto max-w-full max-h-full object-cover" alt="Banner 3">
-                </div>
-                <div id="item4" class="carousel-item w-full">
-                  <img src="{{ MEDIA_URL }}carrusel/banner4.png" class="w-auto h-auto max-w-full max-h-full object-cover" alt="Banner 4">
-                </div>
-            </div>
-          </div>  
-          <div class="flex justify-center w-full py-2 gap-2">
-            <div class="max-w-screen-md w-full flex justify-center">
-                <a href="#item1" class="btn btn-xs">1</a>
-                <a href="#item2" class="btn btn-xs">2</a>
-                <a href="#item3" class="btn btn-xs">3</a>
-                <a href="#item4" class="btn btn-xs">4</a>
-            </div>
+    <main>
+      <div class="flex justify-center ">
+        <div class="carousel w-full max-w-screen-md max-h-96">
+          <div id="item1" class="carousel-item w-full">
+            <img src="{{ MEDIA_URL }}carrusel/banner1.png" class="w-auto h-auto max-w-full max-h-full object-cover" alt="Banner 1">
           </div>
-          <div class="container mx-auto py-8 text-center">
-            <h1 class="text-3xl font-bold mb-6">Bienvenido a nuestra tienda de ferretería</h1>
-            <p class="text-gray-600 mb-6">Encuentra todos los productos que necesitas en un solo lugar</p>
-            <a href="{% url 'catalogo_productos' %}" class="btn btn-primary">Ir al Catálogo</a>
+          <div id="item2" class="carousel-item w-full">
+            <img src="{{ MEDIA_URL }}carrusel/banner2.png" class="w-auto h-auto max-w-full max-h-full object-cover" alt="Banner 2">
           </div>
-      </main>
-  </body>
+          <div id="item3" class="carousel-item w-full">
+            <img src="{{ MEDIA_URL }}carrusel/banner3.png" class="w-auto h-auto max-w-full max-h-full object-cover" alt="Banner 3">
+          </div>
+          <div id="item4" class="carousel-item w-full">
+            <img src="{{ MEDIA_URL }}carrusel/banner4.png" class="w-auto h-auto max-w-full max-h-full object-cover" alt="Banner 4">
+          </div>
+        </div>
+      </div>  
+      <div class="flex justify-center w-full py-2 gap-2">
+        <div class="max-w-screen-md w-full flex justify-center">
+          <a href="#item1" class="btn btn-xs">1</a>
+          <a href="#item2" class="btn btn-xs">2</a>
+          <a href="#item3" class="btn btn-xs">3</a>
+          <a href="#item4" class="btn btn-xs">4</a>
+        </div>
+      </div>
+      <div class="container mx-auto py-8 text-center">
+        <h1 class="text-3xl font-bold mb-6">Bienvenido a nuestra tienda de ferretería</h1>
+        <p class="text-gray-600 mb-6">Encuentra todos los productos que necesitas en un solo lugar</p>
+        <a href="{% url 'catalogo_productos' %}" class="btn btn-primary">Ir al Catálogo</a>
+      </div>
+    </main>
+</body>
 </html>
-

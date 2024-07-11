@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto, Categoria
+from .models import Producto, Usuario
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView, LogoutView
+from .forms import UserRegistrationForm, CustomAuthenticationForm
 from django.conf import settings
 from django.urls import reverse
+from django.contrib.auth.hashers import make_password
 from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 import uuid
 from datetime import datetime
@@ -12,6 +16,42 @@ def home(request):
     }
     request.session['carrito'] = {}
     return render(request, 'index.html', context)
+
+def registrar_cliente(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save(commit=False)
+            new_user.contrasena = make_password(form.cleaned_data['contrasena'])
+            new_user.save()
+            return redirect('login')
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'registro.html', {'form': form})
+
+
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+    authentication_form = CustomAuthenticationForm
+
+class CustomLogoutView(LogoutView):
+    next_page = 'login'
+
+@login_required
+def perfil_cliente(request):
+    return render(request, 'profile.html')
+
+@login_required
+def config_cliente(request):
+    user = request.user
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserRegistrationForm(instance=user)
+    return render(request, 'users/settings.html', {'form': form})
 
 def catalogo_productos(request):
     search_query = request.GET.get('search', '')
@@ -59,7 +99,7 @@ def catalogo_productos(request):
     
     return render(request, 'catalogo_productos.html', context)
 
-def agregar_al_carrito(request, producto_id):
+def agregar_al_carro(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     carrito = request.session.get('carrito', {})
 

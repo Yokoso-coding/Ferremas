@@ -1,7 +1,7 @@
 from django.db import models
-
+from moduloCliente.models import Producto, Categoria, Usuario, Pedido, DetallePedido, Promocion, PromocionProducto, PromocionCategoria, Carrito, DetalleCarrito, OrdenesCompra
 # Create your models here.
-
+"""
 class Categoria(models.Model):
     id_categoria = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50)
@@ -115,4 +115,4 @@ class OrdenesCompra(models.Model):
         ('pendiente', 'Pendiente'),
         ('enviado', 'Enviado'),
         ('entregado', 'Entregado')
-    ])
+    ])"""
