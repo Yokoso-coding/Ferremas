@@ -90,10 +90,10 @@ WSGI_APPLICATION = 'proyectoFerreteria.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ferremas_bd',
-        'USER': 'admin',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1',
+        'NAME': 'ferremas',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
         'PORT': '3306'
     }
 }

@@ -1,0 +1,127 @@
+<!-- moduloCliente/templates/catalogo_productos.html -->
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos</title>
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-100">
+<header>
+    <div class="navbar bg-base-100">
+      <div class="flex-1">
+        <a href="{% url 'home_vendedor' %}" class="btn btn-ghost text-xl">Ferremas</a>
+      </div>
+      <div class="flex-none">
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+            <div class="indicator">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+              <span class="badge badge-sm indicator-item">{{ carrito|length }}</span>
+            </div>
+          </div>
+          <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-72 bg-base-100 shadow">
+            <div class="card-body">
+              <span class="font-bold text-lg">{{ carrito|length }} Items</span>
+              <ul>
+                {% for item in carrito %}
+                <li class="flex justify-between">
+                  <span>{{ item.producto_nombre }}</span>
+                  <span>{{ item.cantidad }}</span>
+                </li>
+                {% endfor %}
+              </ul>
+              <span class="text-info">Subtotal: ${{ total }}</span>
+              <div class="card-actions">
+                <a href="{% url 'ver_carrito_vendedor' %}" class="btn btn-primary btn-block">Ver carrito</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+            <div class="w-10 rounded-full">
+              <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+            </div>
+          </div>
+          <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <li>
+              <a class="justify-between">
+                Profile
+                <span class="badge">New</span>
+              </a>
+            </li>
+            <li><a>Settings</a></li>
+            <li><a>Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container mx-auto py-8">
+      <h1 class="text-3xl font-bold mb-6 text-center">Catálogo de Productos</h1>
+      <div class="flex">
+          <!-- Filtro y búsqueda -->
+          <div class="inline-block bg-white shadow-md rounded-lg p-4 mr-6 max-w-md w-auto">
+            <h2 class="text-xl font-bold mb-4">Buscar y Filtrar</h2>
+            <form method="GET" action="{% url 'catalogo_productos_vendedor' %}">
+                <div class="mb-4">
+                    <label for="search" class="block text-sm font-medium text-gray-700">Buscar por nombre</label>
+                    <input type="text" name="search" id="search" class="input input-bordered w-full mt-1" placeholder="Nombre del producto" value="{{ search_query }}">
+                </div>
+                <div class="mb-4">
+                    <label for="category" class="block text-sm font-medium text-gray-700">Filtrar por categoría</label>
+                    <select name="category" id="category" class="select select-bordered w-full mt-1">
+                        <option value="">Todas las categorías</option>
+                        {% for categoria in categorias %}
+                            <option value="{{ categoria.id }}" {% if category_filter == categoria.id|stringformat:"s" %}selected{% endif %}>{{ categoria.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="precio_min" class="block text-sm font-medium text-gray-700">Precio mínimo</label>
+                    <input type="number" name="precio_min" id="precio_min" class="input input-bordered w-full mt-1" placeholder="Precio mínimo" value="{{ precio_min }}">
+                </div>
+                <div class="mb-4">
+                    <label for="precio_max" class="block text-sm font-medium text-gray-700">Precio máximo</label>
+                    <input type="number" name="precio_max" id="precio_max" class="input input-bordered w-full mt-1" placeholder="Precio máximo" value="{{ precio_max }}">
+                </div>
+                <div class="mb-4">
+                    <label for="ordenar_por" class="block text-sm font-medium text-gray-700">Ordenar por</label>
+                    <select name="ordenar_por" id="ordenar_por" class="select select-bordered w-full mt-1">
+                        <option value="">Seleccione</option>
+                        <option value="precio_asc" {% if ordenar_por == "precio_asc" %}selected{% endif %}>Precio: Menor a Mayor</option>
+                        <option value="precio_desc" {% if ordenar_por == "precio_desc" %}selected{% endif %}>Precio: Mayor a Menor</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <button type="submit" class="btn btn-primary w-full">Aplicar</button>
+                </div>
+            </form>
+          </div>
+
+          <!-- Catálogo de productos -->
+          <div class="w-3/4">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  {% for producto in productos %}
+                  <div class="card bg-white shadow-md rounded-lg p-4">
+                      <div class="card-body">
+                          {% if producto.imagen %}
+                          <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="w-full h-48 object-cover mb-4 rounded-lg">
+                          {% endif %}
+                          <h2 class="card-title text-xl font-bold">{{ producto.nombre }}</h2>
+                          <p class="text-gray-600">{{ producto.descripcion }}</p>
+                          <p class="text-gray-800 font-semibold mt-4">${{ producto.precio|floatformat:0 }}</p>
+                          <a href="{% url 'agregar_al_carro_vendedor' producto.id %}" class="btn btn-primary mt-4">Agregar al Carrito</a>
+                      </div>
+                  </div>
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+  </div>
+</body>
+</html>

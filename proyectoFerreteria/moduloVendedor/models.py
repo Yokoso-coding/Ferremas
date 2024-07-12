@@ -1,5 +1,5 @@
 from django.db import models
-from moduloCliente.models import Producto, Categoria, Usuario, Pedido, DetallePedido, Promocion, PromocionProducto, PromocionCategoria, Carrito, DetalleCarrito, OrdenesCompra
+from moduloCliente.models import Categoria, Producto, CustomUserManager, Usuario, Pedido, DetallePedido, Promocion, PromocionProducto, PromocionCategoria, Carrito, DetalleCarrito, OrdenesCompra, DireccionesEnvio, ValoracionesComentarios, Favoritos
 # Create your models here.
 """
 class Categoria(models.Model):
