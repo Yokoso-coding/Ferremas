@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'proyectoFerreteria.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ferremasbd',
+        'NAME': 'ferremas_bd',
         'USER': 'admin',
         'PASSWORD': 'password',
         'HOST': '127.0.0.1',
@@ -153,3 +153,9 @@ TRANSBANK_ENVIRONMENT = 'integration'  # Cambia a 'production' cuando vayas a pr
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_REDIRECT_URL = 'home'  # Redirige a la página de inicio después de iniciar sesión
+LOGOUT_REDIRECT_URL = 'login'  # Redirige a la página de login después de cerrar sesión
+LOGIN_URL = '/login/'  # Ajusta esto a la URL correcta de tu vista de login
+
+AUTH_USER_MODEL = 'moduloCliente.Usuario'

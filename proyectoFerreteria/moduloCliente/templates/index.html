@@ -38,22 +38,23 @@
               </div>
             </div>
             <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-              <li>
-                {% if user.is_authenticated %}
-                  <a class="justify-between" href="{% url 'profile' %}">
+              {% if user.is_authenticated %}
+                <li>
+                  <a class="justify-between" href="{% url 'perfil_cliente' %}">
                     Profile
                     <span class="badge">New</span>
                   </a>
-                {% else %}
-                  <a class="justify-between" href="{% url 'register' %}">
-                    Register
-                    <span class="badge">New</span>
-                  </a>
-                {% endif %}
-              </li>
-              {% if user.is_authenticated %}
-                <li><a href="{% url 'settings' %}">Settings</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
+                </li>
+                <li><a href="{% url 'config_cliente' %}">Settings</a></li>
+                <li>
+                  <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-ghost">Logout</button>
+                  </form>
+                </li>
+              {% else %}
+                <li><a href="{% url 'registro_cliente' %}">Register</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>  <!-- Botón de Login -->
               {% endif %}
             </ul>
           </div>

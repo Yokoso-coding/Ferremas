@@ -6,7 +6,8 @@ from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 import uuid
 from datetime import datetime
 from django.db.models import Q
-from moduloCliente.models import Producto
+from moduloCliente.models import Producto, Pedido
+from django.contrib import messages
 # Create your views here.
 
 def vendedor(request):
@@ -52,7 +53,7 @@ def catalogoVendedor(request):
 def pedidoVendedor(request):
     return render(request, 'pedidoVendedor.html')
 
-def agregar_al_carrito(request, producto_id):
+def agregar_al_carrito_vendedor(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     carrito = request.session.get('carrito', {})
 
@@ -72,7 +73,7 @@ def agregar_al_carrito(request, producto_id):
     request.session['carrito'] = carrito
     return redirect('catalogo_productos')
 
-def reducir_cantidad(request, producto_id):
+def reducir_cantidad_vendedor(request, producto_id):
     carrito = request.session.get('carrito', {})
     if str(producto_id) in carrito:
         if carrito[str(producto_id)]['cantidad'] > 1:
@@ -80,22 +81,22 @@ def reducir_cantidad(request, producto_id):
         else:
             del carrito[str(producto_id)]
     request.session['carrito'] = carrito
-    return redirect('ver_carrito')
+    return redirect('ver_carrito_vendedor')
 
-def eliminar_del_carrito(request, producto_id):
+def eliminar_del_carrito_vendedor(request, producto_id):
     carrito = request.session.get('carrito', {})
     if str(producto_id) in carrito:
         del carrito[str(producto_id)]
     request.session['carrito'] = carrito
-    return redirect('ver_carrito')
+    return redirect('ver_carrito_vendedor')
 
-def ver_carrito(request):
+def ver_carrito_vendedor(request):
     carrito = request.session.get('carrito', {})
     total = sum(float(item['precio']) * item['cantidad'] for item in carrito.values())
     return render(request, 'ver_carrito.html', {'carrito': carrito, 'total': total})
 
 
-def iniciar_pago(request):
+def iniciar_pago_vendedor(request):
     carrito = request.session.get('carrito', {})
     total = sum(float(item['precio']) * item['cantidad'] for item in carrito.values())
 
@@ -112,7 +113,7 @@ def iniciar_pago(request):
     
     return redirect(response['url'] + '?token_ws=' + response['token'])
 
-def confirmar_pago(request):
+def confirmar_pago_vendedor(request):
     token = request.GET.get('token_ws')
     commerce_code = settings.TRANSBANK_COMMERCE_CODE
     api_key = settings.TRANSBANK_API_KEY
@@ -126,10 +127,22 @@ def confirmar_pago(request):
             producto = Producto.objects.get(id=key)
             producto.stock -= item['cantidad']
             producto.save()
+
+            # Crear y guardar el pedido en la base de datos
+            pedido = Pedido(
+                producto=producto,
+                cantidad=item['cantidad'],
+                total=item['cantidad'] * producto.precio,
+                buy_order=response['buy_order']
+            )
+            pedido.save()
         
         # Vaciar el carrito después de la compra
         request.session['carrito'] = {}
         
-        return render(request, 'pago_exitoso.html', {'response': response})
+        # Agregar un mensaje de éxito
+        messages.success(request, 'Su compra ha sido realizada con éxito.')
+        
+        return render(request, 'pago_exitoso_vendedor.html')
     else:
-        return render(request, 'pago_fallido.html', {'response': response})
+        return render(request, 'pago_fallido_vendedor.html', {'response': response})

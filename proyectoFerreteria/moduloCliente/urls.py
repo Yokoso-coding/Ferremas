@@ -18,9 +18,10 @@ from django.urls import path
 from .views import home, catalogo_productos, agregar_al_carro, ver_carrito, reducir_cantidad, aumentar_cantidad, eliminar_del_carrito, iniciar_pago, confirmar_pago, registrar_cliente, perfil_cliente, config_cliente, CustomLoginView, CustomLogoutView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('', home, name="home"),
+    path('', TemplateView.as_view(template_name='index.html'), name='home'),
     path('catalogo/', catalogo_productos, name='catalogo_productos'),
     path('agregar/<int:producto_id>/', agregar_al_carro, name='agregar_al_carro'),
     path('carrito/', ver_carrito, name='ver_carrito'),
@@ -29,9 +30,9 @@ urlpatterns = [
     path('aumentar/<str:key>/', aumentar_cantidad, name='aumentar_cantidad'),
     path('iniciar_pago/', iniciar_pago, name='iniciar_pago'),
     path('confirmar_pago/', confirmar_pago, name='confirmar_pago'),
-    path('register/', registrar_cliente, name='register'),
-    path('profile/', perfil_cliente, name='profile'),
-    path('settings/', config_cliente, name='settings'),
+    path('registro/', registrar_cliente, name='registro_cliente'),
+    path('perfil/', perfil_cliente, name='perfil_cliente'),
+    path('config/', config_cliente, name='config_cliente'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
     path('login/', CustomLoginView.as_view(), name='login'),  # Definir URL de login
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

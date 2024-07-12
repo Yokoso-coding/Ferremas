@@ -43,7 +43,6 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     nom_usuario = models.CharField(max_length=100, unique=True)
     nombre = models.CharField(max_length=100)
     email = models.EmailField(max_length=100, unique=True)
-    contrasena = models.CharField(max_length=100)
     tipo_usuario = models.CharField(max_length=20, choices=[
         ('Cliente', 'Cliente'),
         ('Vendedor', 'Vendedor'),
@@ -53,11 +52,6 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     ])
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
-    objects = CustomUserManager()
-
-    USERNAME_FIELD = 'nom_usuario'
-    REQUIRED_FIELDS = ['email', 'nombre']
 
     groups = models.ManyToManyField(
         'auth.Group',
@@ -74,11 +68,16 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         verbose_name='user permissions',
     )
 
+    objects = CustomUserManager()
+
+    USERNAME_FIELD = 'nom_usuario'
+    REQUIRED_FIELDS = ['email', 'nombre']
+
     def __str__(self):
         return self.nom_usuario
-
+    
 class Pedido(models.Model):
-    fecha = models.DateField()
+    fecha = models.DateField(auto_now_add=True)
     estado = models.CharField(max_length=20, choices=[
         ('pendiente', 'Pendiente'),
         ('enviado', 'Enviado'),

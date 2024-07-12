@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import vendedor, busquedaVendedor, catalogoVendedor, pedidoVendedor, agregar_al_carrito, ver_carrito, reducir_cantidad, eliminar_del_carrito, iniciar_pago, confirmar_pago
+from .views import vendedor, busquedaVendedor, catalogoVendedor, pedidoVendedor, agregar_al_carrito_vendedor, ver_carrito_vendedor, reducir_cantidad_vendedor, eliminar_del_carrito_vendedor, iniciar_pago_vendedor, confirmar_pago_vendedor
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -8,10 +8,10 @@ urlpatterns = [
     path('busquedaVendedor/', busquedaVendedor, name='busquedaVendedor'),
     path('catalogoVendedor/', catalogoVendedor, name='catalogoVendedor'),
     path('pedidoVendedor/', pedidoVendedor, name='pedidoVendedor'),
-    path('agregar/<int:producto_id>/', agregar_al_carrito, name='agregar_al_carrito'),
-    path('carrito/', ver_carrito, name='ver_carrito'),
-    path('reducir/<int:producto_id>/', reducir_cantidad, name='reducir_cantidad'),
-    path('eliminar/<int:producto_id>/', eliminar_del_carrito, name='eliminar_del_carrito'),
-    path('iniciar_pago/', iniciar_pago, name='iniciar_pago'),
-    path('confirmar_pago/', confirmar_pago, name='confirmar_pago'),
+    path('agregar/<int:producto_id>/', agregar_al_carrito_vendedor, name='agregar_al_carrito_vendedor'),
+    path('carritoVendedor/', ver_carrito_vendedor, name='ver_carrito_vendedor'),
+    path('reducir/<int:producto_id>/', reducir_cantidad_vendedor, name='reducir_cantidad_vendedor'),
+    path('eliminar/<int:producto_id>/', eliminar_del_carrito_vendedor, name='eliminar_del_carrito_vendedor'),
+    path('iniciar_pago/', iniciar_pago_vendedor, name='iniciar_pago_vendedor'),
+    path('confirmar_pago/', confirmar_pago_vendedor, name='confirmar_pago_vendedor'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

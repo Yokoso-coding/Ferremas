@@ -4,46 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Registro</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     {% tailwind_css %}
 </head>
 <body>
     <div class="min-h-screen flex items-center justify-center bg-gray-100">
         <div class="max-w-md w-full bg-white shadow-md rounded-lg p-8">
-            <h2 class="text-2xl font-bold mb-6 text-center">Register</h2>
-            <form method="POST">
+            <h2 class="text-2xl font-bold mb-6 text-center">Registro</h2>
+            <form method="POST" class="space-y-4">
                 {% csrf_token %}
-                <div class="form-control mb-4">
-                    <label class="label" for="nom_usuario">Nombre de Usuario</label>
-                    <input class="input input-bordered" type="text" name="nom_usuario" id="nom_usuario" required>
-                </div>
-                <div class="form-control mb-4">
-                    <label class="label" for="nombre">Nombre Completo</label>
-                    <input class="input input-bordered" type="text" name="nombre" id="nombre" required>
-                </div>
-                <div class="form-control mb-4">
-                    <label class="label" for="email">Email</label>
-                    <input class="input input-bordered" type="email" name="email" id="email" required>
-                </div>
-                <div class="form-control mb-4">
-                    <label class="label" for="contrasena">Contraseña</label>
-                    <input class="input input-bordered" type="password" name="contrasena" id="contrasena" required>
-                </div>
-                <div class="form-control mb-4">
-                    <label class="label" for="contrasena2">Confirmar Contraseña</label>
-                    <input class="input input-bordered" type="password" name="contrasena2" id="contrasena2" required>
-                </div>
-                <div class="form-control mb-4">
-                    <label class="label" for="tipo_usuario">Tipo de Usuario</label>
-                    <select class="input input-bordered" name="tipo_usuario" id="tipo_usuario">
-                        <option value="Cliente">Cliente</option>
-                        <option value="Vendedor">Vendedor</option>
-                        <option value="Bodeguero">Bodeguero</option>
-                        <option value="Contador">Contador</option>
-                        <option value="Administrador">Administrador</option>
-                    </select>
-                </div>
+                {{ form.as_p }}
                 <button class="btn btn-primary w-full" type="submit">Registrar</button>
             </form>
         </div>

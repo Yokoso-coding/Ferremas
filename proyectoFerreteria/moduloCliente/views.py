@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto, Usuario
+from .models import Producto, DetallePedido, Pedido
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from .forms import UserRegistrationForm, CustomAuthenticationForm
@@ -7,6 +7,10 @@ from django.conf import settings
 from django.urls import reverse
 from django.contrib.auth.hashers import make_password
 from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
+from django.urls import reverse_lazy
+from django.contrib import messages
+from django.contrib.auth import login, get_user_model
+
 import uuid
 from datetime import datetime
 
@@ -17,29 +21,31 @@ def home(request):
     request.session['carrito'] = {}
     return render(request, 'index.html', context)
 
-def registrar_cliente(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            new_user = form.save(commit=False)
-            new_user.contrasena = make_password(form.cleaned_data['contrasena'])
-            new_user.save()
-            return redirect('login')
-    else:
-        form = UserRegistrationForm()
-    return render(request, 'registro.html', {'form': form})
-
+# Manejo de usuarios.
 
 class CustomLoginView(LoginView):
     template_name = 'login.html'
     authentication_form = CustomAuthenticationForm
+    redirect_authenticated_user = True
+    next_page = reverse_lazy('home')
 
 class CustomLogoutView(LogoutView):
-    next_page = 'login'
+    next_page = reverse_lazy('home')
+
+def registrar_cliente(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            login(request, new_user)
+            return redirect('home')
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'registro.html', {'form': form})
 
 @login_required
 def perfil_cliente(request):
-    return render(request, 'profile.html')
+    return render(request, 'perfil_cliente.html')
 
 @login_required
 def config_cliente(request):
@@ -48,10 +54,12 @@ def config_cliente(request):
         form = UserRegistrationForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+            return redirect('perfil_cliente')
     else:
         form = UserRegistrationForm(instance=user)
-    return render(request, 'users/settings.html', {'form': form})
+    return render(request, 'config_cliente.html', {'form': form})
+
+######################################################################################
 
 def catalogo_productos(request):
     search_query = request.GET.get('search', '')
@@ -170,6 +178,7 @@ def iniciar_pago(request):
     
     return redirect(response['url'] + '?token_ws=' + response['token'])
 
+@login_required
 def confirmar_pago(request):
     token = request.GET.get('token_ws')
     commerce_code = settings.TRANSBANK_COMMERCE_CODE
@@ -178,17 +187,36 @@ def confirmar_pago(request):
     response = tx.commit(token)
     
     if response['status'] == 'AUTHORIZED':
-        # Actualizar el stock de los productos
+        # Obtener el modelo de usuario personalizado
+        CustomUser = get_user_model()
+        usuario = CustomUser.objects.get(id=request.user.id)
+
         carrito = request.session.get('carrito', {})
+
+        # Crear el pedido
+        pedido = Pedido.objects.create(
+            usuario=usuario,
+            estado='completado'
+        )
+
+        # Actualizar el stock de los productos y crear detalles del pedido
         for key, item in carrito.items():
             producto = Producto.objects.get(id=key)
             producto.stock -= item['cantidad']
             producto.save()
+
+            # Crear el detalle del pedido
+            DetallePedido.objects.create(
+                pedido=pedido,
+                producto=producto,
+                cantidad=item['cantidad'],
+                precio=producto.precio
+            )
         
         # Vaciar el carrito después de la compra
         request.session['carrito'] = {}
         
-        return render(request, 'pago_exitoso.html', {'response': response})
+        return render(request, 'pago_exitoso.html')
     else:
         return render(request, 'pago_fallido.html', {'response': response})
 
